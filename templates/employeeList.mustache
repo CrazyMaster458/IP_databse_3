@@ -1,0 +1,42 @@
+<table class='table table-striped'>
+    <tr>
+        <th>Name</th>
+        <th>Room</th>
+        <th>Phone</th>
+        <th>Job</th>
+        {{#adminn}}
+            <th>Actions</th>
+        {{/adminn}}
+    </tr>
+
+    {{#employees}}
+        <tr>
+            <td>
+                <a href='detail.php?employeeId={{employee_id}}'>{{name}} {{surname}}</a>
+            </td>
+            <td>{{roomName}}</td>
+            <td>{{phone}}</td>
+            <td>{{job}}</td>
+            {{#adminn}}
+                <td>
+                    <form action="update.php" method="get" style="display: inline-block">
+                        <input type="hidden" name="employeeId" value="{{employee_id}}">
+                        <input type="submit" value="Upravit" class="btn btn-info">
+                    </form>
+                    <form action="delete.php" method="post" style="display: inline-block">
+                        <input type="hidden" name="employeeId" value="{{employee_id}}">
+                        <input type="submit" value="Smazat" class="btn btn-danger" onclick="return confirm('Opravdu chcete smazat místnost?\nAkce je nevratná!');">
+                    </form>
+                </td>
+            {{/adminn}}
+        </tr>
+    {{/employees}}
+    {{^employees}}
+        <tr><td colspan="3">Databáze je prázdná</td></tr>
+    {{/employees}}
+
+</table>
+{{#adminn}}
+    <a href="create.php" class="btn btn-primary">Přidat nového zaměstnance</a>
+{{/adminn}}
+
